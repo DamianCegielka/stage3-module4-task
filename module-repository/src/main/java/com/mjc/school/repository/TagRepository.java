@@ -2,6 +2,9 @@ package com.mjc.school.repository;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.model.TagModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,57 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class TagRepository implements BaseRepository<TagModel,Long> {
-
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
-
-    @Override
-    public List<TagModel> readAll() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        return entityManager.createQuery("SELECT t FROM TagModel t", TagModel.class)
-                .getResultList();
-    }
-
-    @Override
-    public Optional<TagModel> readById(Long id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        return Optional.ofNullable(entityManager.find(TagModel.class, id));
-    }
-
-    @Override
-    public TagModel create(TagModel entity) {
-       EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(entity);
-        entityManager.getTransaction().commit();
-        return entity;
-    }
-
-    @Override
-    public TagModel update(TagModel entity) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        TagModel updatedModel = entityManager.find(TagModel.class, entity.getId());
-        updatedModel.setName(entity.getName());
-        entityManager.getTransaction().commit();
-        return updatedModel;
-    }
-
-    @Override
-    public boolean deleteById(Long id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        if (readById(id).isPresent()) {
-            entityManager.getTransaction().begin();
-            entityManager.remove(entityManager.find(TagModel.class, id));
-            entityManager.getTransaction().commit();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean existById(Long id) {
-        return readById(id).isPresent();
-    }
+public interface TagRepository extends JpaRepository<TagModel, Long> {
+    @Query("select t from TagModel t join FETCH t.newsModelSet n where n.id =:newsId")
+    List<TagModel> findAllByNewsModelId(@Param(value = "newsId") Long newsId);
 }
+
