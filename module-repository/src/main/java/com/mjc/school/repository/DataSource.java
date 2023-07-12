@@ -3,16 +3,12 @@ package com.mjc.school.repository;
 import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.NewsModel;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataSource {
-   private static final String FILE_PATH_DATA_SOURCE_NEWS = "module-repository\\src\\main\\resources\\newsdc.txt";
-   private static final String FILE_PATH_DATA_SOURCE_AUTHOR = "module-repository\\src\\main\\resources\\authordc.txt";
+    private static final String FILE_PATH_DATA_SOURCE_NEWS = "module-repository\\src\\main\\resources\\newsdc.txt";
+    private static final String FILE_PATH_DATA_SOURCE_AUTHOR = "module-repository\\src\\main\\resources\\authordc.txt";
 
     private List<NewsModel> listNews = new ArrayList<>();
     private List<AuthorModel> listAuthor = new ArrayList<>();
@@ -27,7 +23,7 @@ public class DataSource {
 
 
     public void loadNewsFromDataSource() {
-
+/*
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_PATH_DATA_SOURCE_NEWS))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -44,9 +40,12 @@ public class DataSource {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+ */
     }
 
     public void loadAuthorsFromDataSource() {
+        /*
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_PATH_DATA_SOURCE_AUTHOR))) {
             String line;
@@ -60,5 +59,9 @@ public class DataSource {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+         */
     }
+
+
 }
