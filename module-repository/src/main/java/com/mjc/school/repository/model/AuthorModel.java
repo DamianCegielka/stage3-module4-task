@@ -29,7 +29,7 @@ public class AuthorModel implements BaseEntity<Long> {
     @LastModifiedDate
     private LocalDateTime lastUpdateTime;
 
-    @OneToMany(mappedBy = "authorModel", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<NewsModel> news;
+    @OneToMany(mappedBy = "authorModel")
+    private List<NewsModel> newsList;
 
 }
