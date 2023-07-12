@@ -1,7 +1,7 @@
 package com.mjc.school.service.dto.news;
 
-import com.mjc.school.repository.dto.NewsModelResponse;
-import com.mjc.school.repository.model.NewsModel;
+import com.mjc.school.dto.NewsModelResponse;
+import com.mjc.school.model.NewsModel;
 
 import java.time.LocalDateTime;
 

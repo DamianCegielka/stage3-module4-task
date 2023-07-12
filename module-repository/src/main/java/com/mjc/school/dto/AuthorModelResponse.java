@@ -1,6 +1,6 @@
-package com.mjc.school.repository.dto;
+package com.mjc.school.dto;
 
-import com.mjc.school.repository.model.AuthorModel;
+import com.mjc.school.model.AuthorModel;
 
 import java.time.LocalDateTime;
 

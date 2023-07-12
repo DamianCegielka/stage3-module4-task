@@ -1,4 +1,4 @@
-package com.mjc.school.repository.model;
+package com.mjc.school.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,18 +8,20 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Entity
-@Table(name = "authors")
+@Table(name = "news")
 @Data
-public class AuthorModel implements BaseEntity<Long> {
+public class NewsModel implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, length = 15, unique = true)
-    private String name;
+    @Column(nullable = false, length = 30)
+    private String title;
+
+    @Column(nullable = false)
+    private String content;
 
     @Column(nullable = false)
     @CreatedDate
@@ -28,9 +30,17 @@ public class AuthorModel implements BaseEntity<Long> {
     @Column(nullable = false)
     @LastModifiedDate
     private LocalDateTime lastUpdateTime;
+    private Long authorId;
 
-    @OneToMany(mappedBy = "authorModel")
-    private List<NewsModel> newsList;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private AuthorModel authorModel;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "news_tag",
+            joinColumns = @JoinColumn(name = "news_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<TagModel> tagModels;
 
     @Override
     public Long getId() {

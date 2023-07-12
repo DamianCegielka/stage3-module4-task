@@ -1,7 +1,7 @@
-package com.mjc.school.repository;
+package com.mjc.school;
 
-import com.mjc.school.repository.model.AuthorModel;
-import com.mjc.school.repository.model.NewsModel;
+import com.mjc.school.model.AuthorModel;
+import com.mjc.school.model.NewsModel;
 
 import java.util.ArrayList;
 import java.util.List;

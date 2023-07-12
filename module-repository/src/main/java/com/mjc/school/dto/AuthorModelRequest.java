@@ -1,4 +1,4 @@
-package com.mjc.school.repository.dto;
+package com.mjc.school.dto;
 
 public class AuthorModelRequest {
 

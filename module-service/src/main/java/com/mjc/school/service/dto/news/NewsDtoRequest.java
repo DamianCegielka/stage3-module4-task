@@ -1,6 +1,6 @@
 package com.mjc.school.service.dto.news;
 
-import com.mjc.school.repository.dto.NewsModelRequest;
+import com.mjc.school.dto.NewsModelRequest;
 
 public class NewsDtoRequest {
 

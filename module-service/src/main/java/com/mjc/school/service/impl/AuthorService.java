@@ -1,7 +1,7 @@
 package com.mjc.school.service.impl;
 
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.model.AuthorModel;
+import com.mjc.school.model.AuthorModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.Validator;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;

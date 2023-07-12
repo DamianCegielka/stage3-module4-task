@@ -1,6 +1,6 @@
-package com.mjc.school.repository.dto;
+package com.mjc.school.dto;
 
-import com.mjc.school.repository.model.NewsModel;
+import com.mjc.school.model.NewsModel;
 import lombok.Getter;
 import lombok.Setter;
 
