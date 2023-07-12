@@ -1,7 +1,7 @@
 package com.mjc.school.repository;
 
-import com.mjc.school.repository.entity.AuthorModel;
-import com.mjc.school.repository.entity.NewsModel;
+import com.mjc.school.repository.model.AuthorModel;
+import com.mjc.school.repository.model.NewsModel;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

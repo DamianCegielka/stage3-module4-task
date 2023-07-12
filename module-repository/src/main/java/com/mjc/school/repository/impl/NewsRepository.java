@@ -2,8 +2,8 @@ package com.mjc.school.repository.impl;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.DataSource;
-import com.mjc.school.repository.entity.NewsModel;
-import com.mjc.school.repository.entity.TagModel;
+import com.mjc.school.repository.model.NewsModel;
+import com.mjc.school.repository.model.TagModel;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

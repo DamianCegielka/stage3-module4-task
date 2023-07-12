@@ -1,6 +1,4 @@
-package com.mjc.school.repository.entity;
-
-import com.mjc.school.repository.model.BaseEntity;
+package com.mjc.school.repository.model;
 
 import javax.persistence.*;
 import java.util.List;

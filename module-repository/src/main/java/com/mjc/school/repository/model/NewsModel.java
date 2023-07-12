@@ -1,7 +1,6 @@
-package com.mjc.school.repository.entity;
+package com.mjc.school.repository.model;
 
 import com.mjc.school.repository.dto.NewsModelRequest;
-import com.mjc.school.repository.model.BaseEntity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

@@ -2,7 +2,7 @@ package com.mjc.school.repository.impl;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.DataSource;
-import com.mjc.school.repository.entity.AuthorModel;
+import com.mjc.school.repository.model.AuthorModel;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
