@@ -20,7 +20,7 @@ public class ModelDtoMapper {
         }
         @Override
         public AuthorModel mapUpdate(AuthorDtoRequest request) {
-            AuthorModel authorModel = new AuthorModel("empty");
+            AuthorModel authorModel = new AuthorModel();
             authorModel.setId(request.getId());
             authorModel.setName(request.getName());
             return authorModel;
