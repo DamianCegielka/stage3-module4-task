@@ -42,4 +42,14 @@ public class NewsModel implements BaseEntity<Long> {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<TagModel> tagModels;
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

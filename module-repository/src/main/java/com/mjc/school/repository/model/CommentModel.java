@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name ="comment")
+@Table(name = "comment")
 @Data
-public class CommentModel implements BaseEntity<Long>{
+public class CommentModel implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,7 +18,17 @@ public class CommentModel implements BaseEntity<Long>{
     private LocalDateTime created;
     @Column(nullable = false)
     private LocalDateTime modified;
-    @ManyToOne(cascade={CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "NEWS_ID", referencedColumnName = "id")
     private NewsModel newsModel;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

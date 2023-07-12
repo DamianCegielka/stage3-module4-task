@@ -20,4 +20,14 @@ public class TagModel implements BaseEntity<Long> {
     @ManyToMany(mappedBy = "tagModels", fetch = FetchType.LAZY)
     private List<NewsModel> newsModels;
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

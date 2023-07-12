@@ -32,4 +32,14 @@ public class AuthorModel implements BaseEntity<Long> {
     @OneToMany(mappedBy = "authorModel")
     private List<NewsModel> newsList;
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
