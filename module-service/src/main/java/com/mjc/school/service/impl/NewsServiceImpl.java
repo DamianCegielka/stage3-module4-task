@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
+public class NewsServiceImpl implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
 
     @Autowired
     BaseRepository<NewsModel, Long> repository;
@@ -27,7 +27,7 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     private Validator validator=new Validator();
 
 
-    public NewsService(BaseRepository<NewsModel, Long> repository) {
+    public NewsServiceImpl(BaseRepository<NewsModel, Long> repository) {
         this.repository = repository;
     }
 

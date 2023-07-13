@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TagService implements BaseService<TagDtoRequest, TagDtoResponse, Long> {
+public class TagServiceImpl implements BaseService<TagDtoRequest, TagDtoResponse, Long> {
 
     private final BaseRepository<TagModel, Long> tagRepository;
 
     @Autowired
-    public TagService(BaseRepository<TagModel, Long> tagRepository) {
+    public TagServiceImpl(BaseRepository<TagModel, Long> tagRepository) {
         this.tagRepository = tagRepository;
     }
 
