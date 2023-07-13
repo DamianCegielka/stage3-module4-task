@@ -2,23 +2,19 @@ package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.annotations.CommandHandler;
-import com.mjc.school.service.BaseService;
+import com.mjc.school.service.AuthorService;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
 @Controller
-public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> {
+@AllArgsConstructor
+public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse, Long>{
 
-    @Autowired
-    public final BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> service;
-
-    public AuthorController(BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> service) {
-        this.service = service;
-    }
+  private final AuthorService service;
 
     @Override
     @CommandHandler(value = "readAllAuthors")
