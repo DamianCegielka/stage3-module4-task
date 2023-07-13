@@ -2,7 +2,7 @@ package com.mjc.school.service.impl;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.model.AuthorModel;
-import com.mjc.school.service.BaseService;
+import com.mjc.school.service.AuthorService;
 import com.mjc.school.service.Validator;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> {
+public class AuthorServiceImpl implements AuthorService {
 
     @Autowired
     BaseRepository<AuthorModel, Long> repository;
@@ -27,7 +27,7 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
     private Validator validator = new Validator();
 
     @Autowired
-    public AuthorService(BaseRepository<AuthorModel, Long> repository) {
+    public AuthorServiceImpl(BaseRepository<AuthorModel, Long> repository) {
         this.repository = repository;
     }
 
@@ -67,5 +67,15 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
     @Override
     public boolean deleteById(Long id) {
         return repository.deleteById(id);
+    }
+
+    @Override
+    public AuthorDtoResponse readByNewsId(Long newsId) {
+        return null;
+    }
+
+    @Override
+    public List<AuthorDtoResponse> readAllPagedAndSorted(int page, int size, String sortBy) {
+        return null;
     }
 }
