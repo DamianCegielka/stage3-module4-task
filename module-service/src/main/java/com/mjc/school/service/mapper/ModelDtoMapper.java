@@ -53,7 +53,7 @@ public class ModelDtoMapper {
 
         @Override
         public NewsModel mapUpdate(NewsDtoRequest request){
-            NewsModel newsModel=new NewsModel("null");
+            NewsModel newsModel=new NewsModel();
             newsModel.setId(request.getId());
             newsModel.setTitle(request.getTitle());
             newsModel.setContent(request.getContent());
