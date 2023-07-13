@@ -8,6 +8,7 @@ dependencies {
     implementation project(':module-web')
     implementation project(':module-service')
     implementation project(':module-repository')
+    implementation 'net.sunshow.nxcloud:nxcloud-springmvc-automapping:0.3.6'
 }
 
 run {
