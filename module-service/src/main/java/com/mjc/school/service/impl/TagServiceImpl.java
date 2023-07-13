@@ -1,8 +1,8 @@
 package com.mjc.school.service.impl;
 
-import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.model.TagModel;
-import com.mjc.school.service.BaseService;
+import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.service.TagService;
 import com.mjc.school.service.dto.tag.TagDtoRequest;
 import com.mjc.school.service.dto.tag.TagDtoResponse;
 import com.mjc.school.service.exception.TagIsDoesNotExistException;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TagServiceImpl implements BaseService<TagDtoRequest, TagDtoResponse, Long> {
+public class TagServiceImpl implements TagService {
 
     private final BaseRepository<TagModel, Long> tagRepository;
 
@@ -67,6 +67,16 @@ public class TagServiceImpl implements BaseService<TagDtoRequest, TagDtoResponse
         } else {
             throw new TagIsDoesNotExistException();
         }
+    }
+
+    @Override
+    public List<TagDtoResponse> readByNewsId(Long newsId) {
+        return null;
+    }
+
+    @Override
+    public List<TagDtoResponse> readAllPagedAndSorted(int page, int size, String sortBy) {
+        return null;
     }
 }
 
