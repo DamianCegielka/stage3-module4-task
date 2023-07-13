@@ -3,6 +3,7 @@ package com.mjc.school.service.impl;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.model.NewsModel;
 import com.mjc.school.service.BaseService;
+import com.mjc.school.service.NewsService;
 import com.mjc.school.service.Validator;
 import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
@@ -15,9 +16,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
-public class NewsServiceImpl implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
+public class NewsServiceImpl implements NewsService {
 
     @Autowired
     BaseRepository<NewsModel, Long> repository;
@@ -68,5 +70,15 @@ public class NewsServiceImpl implements BaseService<NewsDtoRequest, NewsDtoRespo
     @Override
     public boolean deleteById(Long id) {
         return repository.deleteById(id);
+    }
+
+    @Override
+    public Set<NewsDtoResponse> readNewsByVariousParameters(NewsDtoRequest newsRequestDto) {
+        return null;
+    }
+
+    @Override
+    public List<NewsDtoResponse> readAllPagedAndSorted(int page, int size, String sortBy) {
+        return null;
     }
 }
