@@ -1,10 +1,12 @@
 package com.mjc.school.service.impl;
 
+import com.mjc.school.model.AuthorModel;
 import com.mjc.school.repository.AuthorRepository;
 import com.mjc.school.service.AuthorService;
 import com.mjc.school.service.Validator;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
+import com.mjc.school.service.exception.NewsDoesNotExistException;
 import com.mjc.school.service.mapper.AuthorDtoRequestMapperToAuthorModel;
 import com.mjc.school.service.mapper.AuthorModelMapperToAuthorDtoResponse;
 import com.mjc.school.service.mapper.ModelDtoMapper;
@@ -31,41 +33,37 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public AuthorDtoResponse readById(Long id) {
-        /*Optional<AuthorModel> authorDtoResponse = repository.readById(id);
-        if (authorDtoResponse.isPresent()) {
-            return mapAuthorModelToAuthorDtoResponse.map(authorDtoResponse.get());
-        }
-
-         */
-        return null;
+        return mapAuthorModelToAuthorDtoResponse
+                .map(repository
+                        .findById(id)
+                        .orElseThrow(() -> new NewsDoesNotExistException(id)));
     }
 
     @Override
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
-        /*try {
+        try{
             validator.lengthBetween3And15Symbols(createRequest.getName());
             AuthorModel authorModel = mapAuthorDtoRequestToAuthorModel.map(createRequest);
-            return mapAuthorModelToAuthorDtoResponse.map(repository.create(authorModel));
+            return mapAuthorModelToAuthorDtoResponse.map(repository.save(authorModel));
         } catch (Exception e) {
         }
-
-         */
         return null;
     }
 
     @Override
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
-        /*
         AuthorModel authorModel = mapAuthorDtoRequestToAuthorModel.mapUpdate(updateRequest);
-        return mapAuthorModelToAuthorDtoResponse.map(repository.update(authorModel));
+        return mapAuthorModelToAuthorDtoResponse.map(repository.save(authorModel));
 
-         */
-        return null;
     }
 
     @Override
     public boolean deleteById(Long id) {
-        // return repository.deleteById(id);
+        try{
+            repository.deleteById(id);
+            return true;
+        }catch (Exception ex){
+        }
         return false;
     }
 
