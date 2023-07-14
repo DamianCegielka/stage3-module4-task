@@ -8,7 +8,10 @@ import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
 import org.springframework.stereotype.Component;
 
+
 public class ModelDtoMapper {
+
+    @Component
     public static class MapAuthorDtoRequestToAuthorModel implements AuthorDtoRequestMapperToAuthorModel {
 
         @Override
@@ -27,6 +30,7 @@ public class ModelDtoMapper {
         }
     }
 
+    @Component
     public static class MapAuthorModelToAuthorDtoResponse implements AuthorModelMapperToAuthorDtoResponse {
 
         @Override
@@ -40,6 +44,7 @@ public class ModelDtoMapper {
         }
     }
 
+    @Component
     public static class MapNewsDtoRequestToNewsModel implements NewsDtoRequestMapperToNewsModel {
 
         @Override
