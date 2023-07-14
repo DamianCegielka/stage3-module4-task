@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthorRepository extends JpaRepository<AuthorModel, Long> {
 
-        @Query("Select a FROM AuthorModel a JOIN a.newsModelList n WHERE n.id = :newsId")
-        AuthorModel findAllByNewsModelId(@Param(value = "newsId") Long newsId);
+    @Query("SELECT a FROM AuthorModel a JOIN a.newsList n WHERE n.id = :newsId")
+    AuthorModel findAllByNewsModelId(@Param("newsId") Long newsId);
     }

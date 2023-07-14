@@ -33,7 +33,7 @@ public class NewsModel implements BaseEntity<Long> {
     private Long authorId;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "authorId", insertable = false, updatable = false)
     private AuthorModel authorModel;
 
     @ManyToMany(fetch = FetchType.LAZY)

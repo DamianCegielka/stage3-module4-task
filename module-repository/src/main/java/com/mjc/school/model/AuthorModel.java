@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "authors")
+@Table(name = "author")
 @Data
 public class AuthorModel implements BaseEntity<Long> {
 
