@@ -1,46 +1,59 @@
 package com.mjc.school.controller.impl;
 
-import com.mjc.school.controller.BaseController;
-import com.mjc.school.service.BaseService;
+import com.mjc.school.controller.BaseRestController;
+import com.mjc.school.service.NewsService;
 import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
-public class NewsController implements BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
+@RequestMapping(value = "/news", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@AllArgsConstructor
+public class NewsController implements BaseRestController<NewsDtoRequest, NewsDtoResponse, Long> {
 
-    @Autowired
-    public final BaseService<NewsDtoRequest, NewsDtoResponse, Long> service;
+    public final NewsService service;
 
-    public NewsController(BaseService<NewsDtoRequest, NewsDtoResponse, Long> service) {
-        this.service = service;
+
+    @Override
+    @GetMapping
+    public ResponseEntity<List<NewsDtoResponse>> readAllByPage(
+            @Min(1)
+            @RequestParam int page,
+            @RequestParam(required = false, defaultValue = "5") int size,
+            @RequestParam(name = "sort_by", required = false, defaultValue = "name::asc") String sortBy) {
+        return new ResponseEntity<>(service.readAllPagedAndSorted(page, size, sortBy), HttpStatus.valueOf(200));
     }
 
     @Override
-    public NewsDtoResponse create(NewsDtoRequest createRequest) {
-        return service.create(createRequest);
+    @GetMapping("/{id}")
+    public ResponseEntity<NewsDtoResponse> readById(@PathVariable Long id) {
+        return new ResponseEntity<>(service.readById(id), HttpStatus.valueOf(200));
     }
 
     @Override
-    public List<NewsDtoResponse> readAll() {
-        return service.readAll();
+    @PostMapping("/create")
+    public ResponseEntity<NewsDtoResponse> create(@RequestBody NewsDtoRequest createRequest) {
+        return new ResponseEntity<>(service.create(createRequest), HttpStatus.valueOf(201));
     }
 
     @Override
-    public NewsDtoResponse readById(Long id) {
-        return service.readById(id);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<NewsDtoResponse> update(@PathVariable Long id,
+                                                  @RequestBody NewsDtoRequest updateRequest) {
+        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.valueOf(200));
     }
 
     @Override
-    public NewsDtoResponse update(NewsDtoRequest updateRequest) {
-        return service.update(updateRequest);
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        service.deleteById(id);
     }
 
-    @Override
-    public boolean deleteById(Long id) {
-        return service.deleteById(id);
-    }
 }
