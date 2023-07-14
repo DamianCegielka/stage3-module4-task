@@ -3,9 +3,11 @@ package com.mjc.school.service;
 import com.mjc.school.service.exception.LengthIsNotBetween3and15Exception;
 import com.mjc.school.service.exception.LengthIsNotBetween5and255Exception;
 import com.mjc.school.service.exception.LengthIsNotBetween5and30Exception;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
 public class Validator {
 
 

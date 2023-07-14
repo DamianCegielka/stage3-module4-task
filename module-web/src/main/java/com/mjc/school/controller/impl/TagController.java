@@ -3,23 +3,19 @@ package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.annotations.CommandHandler;
-import com.mjc.school.service.BaseService;
+import com.mjc.school.service.TagService;
 import com.mjc.school.service.dto.tag.TagDtoRequest;
 import com.mjc.school.service.dto.tag.TagDtoResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class TagController implements BaseController<TagDtoRequest, TagDtoResponse, Long> {
 
-
-    public final BaseService<TagDtoRequest, TagDtoResponse, Long> service;
-    @Autowired
-    public TagController(BaseService<TagDtoRequest, TagDtoResponse, Long> service) {
-        this.service = service;
-    }
+    public final TagService service;
 
     @Override
     @CommandHandler(value = "createTag")
