@@ -10,14 +10,18 @@ import java.util.List;
 
 @Repository
 public interface NewsRepository extends JpaRepository<NewsModel, Long> {
-    @Query("Select n from NewsModel n join n.tagModelSet t where t.name like %:tagName%")
-    List<NewsModel> findAllByTagModelName(@Param(value = "tagName") String tagName);
-    @Query("Select n from NewsModel n join n.tagModelSet t where t.id like %:tagId%")
-    List<NewsModel> findAllByTagModelId(@Param(value = "tagId") Long tagId);
-    @Query("Select n from NewsModel n join n.authorModel a where a.name = :authorName")
+    @Query("SELECT n FROM NewsModel n JOIN n.tagModels t WHERE t.name LIKE CONCAT('%', :tagName, '%')")
+    List<NewsModel> findAllByTagModelName(@Param("tagName") String tagName);
+    @Query("SELECT n FROM NewsModel n JOIN n.tagModels t WHERE t.id LIKE CONCAT('%', :tagId, '%')")
+    List<NewsModel> findAllByTagModelId(@Param("tagId") Long tagId);
+    @Query("SELECT n FROM NewsModel n JOIN n.authorModel a WHERE a.name = :authorName")
     List<NewsModel> findAllByAuthorModelName(@Param(value = "authorName") String authorName);
-    @Query("Select n from NewsModel n where n.title like %:title%")
+    @Query("SELECT n FROM NewsModel n WHERE n.title LIKE CONCAT('%', :title, '%')")
     List<NewsModel> findAllByTitle(@Param(value = "title") String title);
-    @Query("Select n from NewsModel n where n.content like %:content%")
+    @Query("SELECT n FROM NewsModel n WHERE n.content LIKE CONCAT('%', :content, '%')")
     List<NewsModel> findAllByContent(@Param(value = "content") String content);
+
+
+
+
 }
