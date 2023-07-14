@@ -11,6 +11,8 @@ import com.mjc.school.service.mapper.AuthorDtoRequestMapperToAuthorModel;
 import com.mjc.school.service.mapper.AuthorModelMapperToAuthorDtoResponse;
 import com.mjc.school.service.mapper.ModelDtoMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
-
 
     private final AuthorRepository repository;
     private final AuthorModelMapperToAuthorDtoResponse mapAuthorModelToAuthorDtoResponse = new ModelDtoMapper.MapAuthorModelToAuthorDtoResponse();
@@ -69,11 +70,20 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public AuthorDtoResponse readByNewsId(Long newsId) {
-        return null;
+        return mapAuthorModelToAuthorDtoResponse.map(repository.findAllByNewsModelId(newsId));
     }
 
     @Override
     public List<AuthorDtoResponse> readAllPagedAndSorted(int page, int size, String sortBy) {
-        return null;
+        String[] split = sortBy.split("::");
+        return repository
+                .findAll(PageRequest
+                        .of(page - 1,
+                                size,
+                                split[1].equals("asc") ? Sort.by(split[0]).ascending() : Sort.by(split[0]).descending()))
+                .getContent()
+                .stream()
+                .map(mapAuthorModelToAuthorDtoResponse::map)
+                .toList();
     }
 }

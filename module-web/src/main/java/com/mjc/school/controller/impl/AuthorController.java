@@ -56,5 +56,10 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
         service.deleteById(id);
     }
 
+    @GetMapping("/by-news/{newsId}")
+    public ResponseEntity<AuthorDtoResponse> readByNewsId(@PathVariable Long newsId) {
+        return new ResponseEntity<>(service.readByNewsId(newsId), HttpStatus.OK );
+    }
+
 
 }
