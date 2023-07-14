@@ -19,7 +19,6 @@ public class CommentController implements BaseRestController<CommentDtoRequest, 
 
     public final CommentService service;
 
-
     @Override
     @GetMapping
     public ResponseEntity<List<CommentDtoResponse>> readAllByPage

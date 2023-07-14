@@ -3,9 +3,11 @@ package com.mjc.school.service.impl;
 import com.mjc.school.service.CommentService;
 import com.mjc.school.service.dto.comment.CommentDtoRequest;
 import com.mjc.school.service.dto.comment.CommentDtoResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentDtoResponse> readAll() {

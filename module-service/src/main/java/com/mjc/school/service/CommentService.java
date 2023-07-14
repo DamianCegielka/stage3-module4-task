@@ -5,7 +5,8 @@ import com.mjc.school.service.dto.comment.CommentDtoResponse;
 
 import java.util.List;
 
-public interface CommentService extends BaseService<CommentDtoRequest, CommentDtoResponse,Long> {
+public interface CommentService extends BaseService<CommentDtoRequest, CommentDtoResponse, Long> {
     List<CommentDtoResponse> readByNewsId(Long newsId);
+
     List<CommentDtoResponse> readAllPagedAndSorted(int page, int size, String sortBy);
 }
