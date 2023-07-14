@@ -1,6 +1,7 @@
 package com.mjc.school.model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class CommentModel implements BaseEntity<Long> {
     private Long id;
 
     @Column(nullable = false)
+    @Length(min = 5, max = 255)
     private String content;
 
     @Column(nullable = false)
