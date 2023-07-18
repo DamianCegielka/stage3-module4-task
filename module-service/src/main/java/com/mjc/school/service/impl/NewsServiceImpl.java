@@ -79,7 +79,28 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public Set<NewsDtoResponse> readNewsByVariousParameters(NewsDtoRequest newsDtoRequest) {
-        return null;
+
+        Set<NewsModel> searchResult = new HashSet<>();
+        if (!newsDtoRequest.getTagNames().isBlank()) {
+            Arrays.stream(newsDtoRequest.getTagNames().split(","))
+                    .map(repository::findAllByTagModelName)
+                    .forEach(searchResult::addAll);
+        }
+        if (!newsDtoRequest.getTagIds().isBlank()) {
+            Arrays.stream(newsDtoRequest.getTagIds().split(","))
+                    .map(s -> repository.findAllByTagModelId(Long.valueOf(s)))
+                    .forEach(searchResult::addAll);
+        }
+        if (!newsDtoRequest.getAuthorName().isBlank()) {
+            searchResult.addAll(repository.findAllByAuthorModelName(newsDtoRequest.getAuthorName()));
+        }
+        if (!newsDtoRequest.getTitle().isBlank()) {
+            searchResult.addAll(repository.findAllByTitle(newsDtoRequest.getTitle()));
+        }
+        if (!newsDtoRequest.getContent().isBlank()) {
+            searchResult.addAll(repository.findAllByContent(newsDtoRequest.getContent()));
+        }
+        return searchResult.stream().map(mapNewsModelToDtoResponse::map).collect(Collectors.toSet());
     }
 
     @Override
