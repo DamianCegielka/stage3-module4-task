@@ -5,9 +5,12 @@ import lombok.Data;
 @Data
 public class NewsDtoRequest {
 
-    Long id;
-    String title;
-    String content;
-    Long authorId;
+    private Long id;
+    private String title;
+    private String content;
+    private Long authorId;
+    private String tagIds;
+    private String tagNames;
+    private String authorName;
 
 }
