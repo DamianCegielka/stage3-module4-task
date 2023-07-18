@@ -36,6 +36,7 @@ public class CommentController implements BaseRestController<CommentDtoRequest, 
 
     @Override
     @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<CommentDtoResponse> create(@RequestBody CommentDtoRequest createRequest) {
         return new ResponseEntity<>(service.create(createRequest), HttpStatus.valueOf(201));
     }

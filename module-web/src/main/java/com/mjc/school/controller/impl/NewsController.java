@@ -38,6 +38,7 @@ public class NewsController implements BaseRestController<NewsDtoRequest, NewsDt
 
     @Override
     @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<NewsDtoResponse> create(@RequestBody NewsDtoRequest createRequest) {
         return new ResponseEntity<>(service.create(createRequest), HttpStatus.valueOf(201));
     }

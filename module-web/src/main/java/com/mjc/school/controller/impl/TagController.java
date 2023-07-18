@@ -38,6 +38,7 @@ public class TagController implements BaseRestController<TagDtoRequest, TagDtoRe
 
     @Override
     @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<TagDtoResponse> create(@RequestBody TagDtoRequest createRequest) {
         return new ResponseEntity<>(service.create(createRequest), HttpStatus.valueOf(201));
     }

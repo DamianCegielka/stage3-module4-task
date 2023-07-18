@@ -37,6 +37,7 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
 
     @Override
     @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AuthorDtoResponse> create(@RequestBody AuthorDtoRequest createRequest) {
         return new ResponseEntity<>(service.create(createRequest), HttpStatus.valueOf(201));
     }
