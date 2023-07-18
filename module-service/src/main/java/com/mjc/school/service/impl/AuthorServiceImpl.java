@@ -22,9 +22,9 @@ import java.util.List;
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository repository;
-    private final AuthorModelMapperToAuthorDtoResponse mapAuthorModelToAuthorDtoResponse = new ModelDtoMapper.MapAuthorModelToAuthorDtoResponse();
-    private final AuthorDtoRequestMapperToAuthorModel mapAuthorDtoRequestToAuthorModel = new ModelDtoMapper.MapAuthorDtoRequestToAuthorModel();
-    private final Validator validator = new Validator();
+    private final AuthorModelMapperToAuthorDtoResponse mapAuthorModelToAuthorDtoResponse;
+    private final AuthorDtoRequestMapperToAuthorModel mapAuthorDtoRequestToAuthorModel;
+    private final Validator validator;
 
 
     @Override
