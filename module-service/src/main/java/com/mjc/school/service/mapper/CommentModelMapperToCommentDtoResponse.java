@@ -12,6 +12,4 @@ public interface CommentModelMapperToCommentDtoResponse {
 
     CommentDtoResponse map(CommentModel authorModel);
 
-    List<CommentDtoResponse> mapList(List<CommentModel> commentModels);
-
 }

@@ -61,5 +61,4 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
         return new ResponseEntity<>(service.readByNewsId(newsId), HttpStatus.OK );
     }
 
-
 }

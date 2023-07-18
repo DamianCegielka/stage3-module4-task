@@ -7,13 +7,19 @@ import com.mjc.school.service.Validator;
 import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
 import com.mjc.school.service.exception.NewsDoesNotExistException;
+import com.mjc.school.service.mapper.CommentModelMapperToCommentDtoResponse;
 import com.mjc.school.service.mapper.NewsDtoRequestMapperToNewsModel;
 import com.mjc.school.service.mapper.NewsModelMapperToDtoResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -72,12 +78,19 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public Set<NewsDtoResponse> readNewsByVariousParameters(NewsDtoRequest newsRequestDto) {
+    public Set<NewsDtoResponse> readNewsByVariousParameters(NewsDtoRequest newsDtoRequest) {
         return null;
     }
 
     @Override
     public List<NewsDtoResponse> readAllPagedAndSorted(int page, int size, String sortBy) {
-        return null;
+        String[] split = sortBy.split("::");
+        return repository
+                .findAll(PageRequest
+                        .of(page - 1, size, split[1].equals("asc") ? Sort.by(split[0]).ascending() : Sort.by(split[0]).descending()))
+                .getContent()
+                .stream()
+                .map(mapNewsModelToDtoResponse::map)
+                .toList();
     }
 }

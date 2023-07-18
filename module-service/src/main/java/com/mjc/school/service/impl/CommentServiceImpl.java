@@ -23,7 +23,6 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository repository;
     private final CommentModelMapperToCommentDtoResponse mapCommentModelToCommentDtoResponse;
-    //TO DO
     private final CommentDtoRequestMapperToCommentModel mapCommentDtoRequestToCommentModel;
     private final Validator validator;
 
@@ -71,7 +70,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDtoResponse> readByNewsId(Long newsId) {
-        return mapCommentModelToCommentDtoResponse.mapList(repository.findAllByNewsModelId(newsId));
+        return   repository
+                .findAllByNewsModelId(newsId)
+                .stream()
+                .map(mapCommentModelToCommentDtoResponse::map)
+                .toList();
     }
 
     @Override

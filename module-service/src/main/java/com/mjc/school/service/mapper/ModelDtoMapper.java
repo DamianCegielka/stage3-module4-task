@@ -100,13 +100,6 @@ public class ModelDtoMapper {
             return commentDtoResponse;
         }
 
-        @Override
-        public List<CommentDtoResponse> mapList(List<CommentModel> commentModel) {
-            return commentModel
-                    .stream()
-                    .map(this::map)
-                    .toList();
-        }
     }
 
     @Component
