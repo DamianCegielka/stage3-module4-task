@@ -8,6 +8,8 @@ import com.mjc.school.service.dto.tag.TagDtoResponse;
 import com.mjc.school.service.exception.TagIsDoesNotExistException;
 import com.mjc.school.service.mapper.TagMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +19,12 @@ import java.util.Optional;
 @AllArgsConstructor
 public class TagServiceImpl implements TagService {
 
-    private final TagRepository tagRepository;
+    private final TagRepository repository;
+    private final TagMapper tagMapper;
 
     @Override
     public List<TagDtoResponse> readAll() {
-        return tagRepository.findAll().stream()
+        return repository.findAll().stream()
                 .map(TagMapper.INSTANCE::tagModelToDto)
                 .toList();
     }
@@ -29,7 +32,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public TagDtoResponse readById(Long id) {
 
-        Optional<TagModel> tagModel = tagRepository.findById(id);
+        Optional<TagModel> tagModel = repository.findById(id);
         if (tagModel.isPresent()) {
             return TagMapper.INSTANCE.tagModelToDto(tagModel.get());
         } else {
@@ -39,15 +42,15 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public TagDtoResponse create(TagDtoRequest createRequest) {
-        TagModel tagModel = tagRepository.save(TagMapper.INSTANCE.tagDtoToModel(createRequest));
+        TagModel tagModel = repository.save(TagMapper.INSTANCE.tagDtoToModel(createRequest));
         return TagMapper.INSTANCE.tagModelToDto(tagModel);
     }
 
     @Override
     public TagDtoResponse update(TagDtoRequest updateRequest) {
 
-        if (tagRepository.existsById(updateRequest.getId())) {
-            TagModel tagModel = tagRepository.save(TagMapper.INSTANCE.tagDtoToModel(updateRequest));
+        if (repository.existsById(updateRequest.getId())) {
+            TagModel tagModel = repository.save(TagMapper.INSTANCE.tagDtoToModel(updateRequest));
             return TagMapper.INSTANCE.tagModelToDto(tagModel);
         } else {
             throw new TagIsDoesNotExistException();
@@ -57,8 +60,8 @@ public class TagServiceImpl implements TagService {
     @Override
     public boolean deleteById(Long id) {
 
-        if (tagRepository.existsById(id)) {
-            tagRepository.deleteById(id);
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
             return true;
         } else {
             throw new TagIsDoesNotExistException();
@@ -67,12 +70,24 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<TagDtoResponse> readByNewsId(Long newsId) {
-        return null;
+        return repository
+                .findAllByNewsModelId(newsId)
+                .stream()
+                .map(tagMapper::tagModelToDto)
+                .toList();
     }
 
     @Override
     public List<TagDtoResponse> readAllPagedAndSorted(int page, int size, String sortBy) {
-        return null;
+        String[] split = sortBy.split("::");
+        return repository
+                .findAll(PageRequest
+                        .of(page - 1, size, split[1].equals("asc") ? Sort.by(split[0]).ascending() : Sort.by(split[0]).descending()))
+                .getContent()
+                .stream()
+                .map(tagMapper::tagModelToDto)
+                .toList();
     }
+
 }
 
