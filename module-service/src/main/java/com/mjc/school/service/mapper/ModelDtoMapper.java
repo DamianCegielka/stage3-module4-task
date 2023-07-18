@@ -3,12 +3,15 @@ package com.mjc.school.service.mapper;
 import com.mjc.school.model.AuthorModel;
 import com.mjc.school.model.CommentModel;
 import com.mjc.school.model.NewsModel;
+import com.mjc.school.model.TagModel;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
 import com.mjc.school.service.dto.comment.CommentDtoRequest;
 import com.mjc.school.service.dto.comment.CommentDtoResponse;
 import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
+import com.mjc.school.service.dto.tag.TagDtoRequest;
+import com.mjc.school.service.dto.tag.TagDtoResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -118,6 +121,26 @@ public class ModelDtoMapper {
             commentModel.setCreated(commentDtoRequest.getCreated());
             commentModel.setModified(commentDtoRequest.getModified());
             return null;
+        }
+    }
+
+    @Component
+    public static class TagMapper implements com.mjc.school.service.mapper.TagMapper{
+
+        @Override
+        public TagDtoResponse tagModelToDto(TagModel tagModel) {
+            TagDtoResponse tagDtoResponse=new TagDtoResponse();
+            tagDtoResponse.setId(tagDtoResponse.getId());
+            tagDtoResponse.setName(tagModel.getName());
+            return tagDtoResponse;
+        }
+
+        @Override
+        public TagModel tagDtoToModel(TagDtoRequest tagDtoRequest) {
+            TagModel tagModel=new TagModel();
+            tagModel.setId(tagModel.getId());
+            tagModel.setName(tagModel.getName());
+            return tagModel;
         }
     }
 }
