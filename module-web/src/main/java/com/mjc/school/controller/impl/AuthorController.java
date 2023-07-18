@@ -5,7 +5,6 @@ import com.mjc.school.service.AuthorService;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +57,7 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
 
     @GetMapping("/by-news/{newsId}")
     public ResponseEntity<AuthorDtoResponse> readByNewsId(@PathVariable Long newsId) {
-        return new ResponseEntity<>(service.readByNewsId(newsId), HttpStatus.OK );
+        return new ResponseEntity<>(service.readByNewsId(newsId), HttpStatus.OK);
     }
 
 }
