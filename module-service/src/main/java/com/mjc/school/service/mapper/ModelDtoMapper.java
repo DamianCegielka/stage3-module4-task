@@ -1,12 +1,17 @@
 package com.mjc.school.service.mapper;
 
 import com.mjc.school.model.AuthorModel;
+import com.mjc.school.model.CommentModel;
 import com.mjc.school.model.NewsModel;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
+import com.mjc.school.service.dto.comment.CommentDtoRequest;
+import com.mjc.school.service.dto.comment.CommentDtoResponse;
 import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 public class ModelDtoMapper {
@@ -21,6 +26,7 @@ public class ModelDtoMapper {
             authorModel.setName(request.getName());
             return authorModel;
         }
+
         @Override
         public AuthorModel mapUpdate(AuthorDtoRequest request) {
             AuthorModel authorModel = new AuthorModel();
@@ -34,8 +40,8 @@ public class ModelDtoMapper {
     public static class MapAuthorModelToAuthorDtoResponse implements AuthorModelMapperToAuthorDtoResponse {
 
         @Override
-        public AuthorDtoResponse map(AuthorModel authorModel){
-            AuthorDtoResponse authorDtoResponse=new AuthorDtoResponse();
+        public AuthorDtoResponse map(AuthorModel authorModel) {
+            AuthorDtoResponse authorDtoResponse = new AuthorDtoResponse();
             authorDtoResponse.setId(authorModel.getId());
             authorDtoResponse.setName(authorModel.getName());
             authorDtoResponse.setCreateDate(authorModel.getCreateDate());
@@ -48,8 +54,8 @@ public class ModelDtoMapper {
     public static class MapNewsDtoRequestToNewsModel implements NewsDtoRequestMapperToNewsModel {
 
         @Override
-        public NewsModel map(NewsDtoRequest request){
-            NewsModel newsModel=new NewsModel();
+        public NewsModel map(NewsDtoRequest request) {
+            NewsModel newsModel = new NewsModel();
             newsModel.setTitle(request.getTitle());
             newsModel.setContent(request.getContent());
             newsModel.setAuthorId(request.getAuthorId());
@@ -57,8 +63,8 @@ public class ModelDtoMapper {
         }
 
         @Override
-        public NewsModel mapUpdate(NewsDtoRequest request){
-            NewsModel newsModel=new NewsModel();
+        public NewsModel mapUpdate(NewsDtoRequest request) {
+            NewsModel newsModel = new NewsModel();
             newsModel.setId(request.getId());
             newsModel.setTitle(request.getTitle());
             newsModel.setContent(request.getContent());
@@ -71,13 +77,54 @@ public class ModelDtoMapper {
     public static class MapNewsModelToDtoResponse implements NewsModelMapperToDtoResponse {
 
         @Override
-        public NewsDtoResponse map(NewsModel model){
-            NewsDtoResponse newsDtoResponse=new NewsDtoResponse();
+        public NewsDtoResponse map(NewsModel model) {
+            NewsDtoResponse newsDtoResponse = new NewsDtoResponse();
             newsDtoResponse.setId(model.getId());
             newsDtoResponse.setContent(model.getContent());
             newsDtoResponse.setTitle(model.getTitle());
             newsDtoResponse.setAuthorId(model.getAuthorId());
             return newsDtoResponse;
+        }
+    }
+
+    @Component
+    public static class MapCommentModelToDtoResponse implements CommentModelMapperToCommentDtoResponse {
+
+        @Override
+        public CommentDtoResponse map(CommentModel model) {
+            CommentDtoResponse commentDtoResponse = new CommentDtoResponse();
+            commentDtoResponse.setId(model.getId());
+            commentDtoResponse.setContent(model.getContent());
+            commentDtoResponse.setCreated(model.getCreated());
+            commentDtoResponse.setModified(model.getModified());
+            return commentDtoResponse;
+        }
+
+        @Override
+        public List<CommentDtoResponse> mapList(List<CommentModel> commentModel) {
+            return commentModel
+                    .stream()
+                    .map(this::map)
+                    .toList();
+        }
+    }
+
+    @Component
+    public static class MapCommentDtoRequestToCommentModel implements CommentDtoRequestMapperToCommentModel {
+
+        @Override
+        public CommentModel map(CommentDtoRequest commentDtoRequest) {
+            return null;
+        }
+
+        @Override
+        public CommentModel mapUpdate(CommentDtoRequest commentDtoRequest) {
+            CommentModel commentModel = new CommentModel();
+            commentModel.setId(commentModel.getId());
+            commentModel.setContent(commentModel.getContent());
+            commentModel.setCreated(commentDtoRequest.getCreated());
+            commentModel.setModified(commentDtoRequest.getModified());
+            return null;
         }
     }
 }
