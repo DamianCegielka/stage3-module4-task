@@ -7,7 +7,6 @@ import com.mjc.school.service.Validator;
 import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
 import com.mjc.school.service.exception.NewsDoesNotExistException;
-import com.mjc.school.service.mapper.CommentModelMapperToCommentDtoResponse;
 import com.mjc.school.service.mapper.NewsDtoRequestMapperToNewsModel;
 import com.mjc.school.service.mapper.NewsModelMapperToDtoResponse;
 import lombok.AllArgsConstructor;
