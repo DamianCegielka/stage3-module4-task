@@ -19,19 +19,14 @@ import java.util.List;
 
 public class ModelDtoMapper {
 
+    private ModelDtoMapper() {
+    }
+
     @Component
     public static class MapAuthorDtoRequestToAuthorModel implements AuthorDtoRequestMapperToAuthorModel {
 
         @Override
         public AuthorModel map(AuthorDtoRequest request) {
-            AuthorModel authorModel = new AuthorModel();
-            authorModel.setId(request.getId());
-            authorModel.setName(request.getName());
-            return authorModel;
-        }
-
-        @Override
-        public AuthorModel mapUpdate(AuthorDtoRequest request) {
             AuthorModel authorModel = new AuthorModel();
             authorModel.setId(request.getId());
             authorModel.setName(request.getName());

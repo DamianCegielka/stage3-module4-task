@@ -7,5 +7,4 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface AuthorDtoRequestMapperToAuthorModel {
     AuthorModel map(AuthorDtoRequest authorDtoRequest);
-    AuthorModel mapUpdate(AuthorDtoRequest authorDtoRequest);
 }

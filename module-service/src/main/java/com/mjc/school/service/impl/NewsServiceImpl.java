@@ -55,7 +55,8 @@ public class NewsServiceImpl implements NewsService {
             validator.lengthBetween5And255Symbols(createRequest.getContent());
             NewsModel newsModel = mapNewsDtoRequestToNewsModel.map(createRequest);
             return mapNewsModelToDtoResponse.map(repository.save(newsModel));
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return null;
     }

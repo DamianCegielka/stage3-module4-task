@@ -46,14 +46,15 @@ public class AuthorServiceImpl implements AuthorService {
             validator.lengthBetween3And15Symbols(createRequest.getName());
             AuthorModel authorModel = mapAuthorDtoRequestToAuthorModel.map(createRequest);
             return mapAuthorModelToAuthorDtoResponse.map(repository.save(authorModel));
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return null;
     }
 
     @Override
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
-        AuthorModel authorModel = mapAuthorDtoRequestToAuthorModel.mapUpdate(updateRequest);
+        AuthorModel authorModel = mapAuthorDtoRequestToAuthorModel.map(updateRequest);
         return mapAuthorModelToAuthorDtoResponse.map(repository.save(authorModel));
 
     }
@@ -64,6 +65,7 @@ public class AuthorServiceImpl implements AuthorService {
             repository.deleteById(id);
             return true;
         }catch (Exception ex){
+            ex.printStackTrace();
         }
         return false;
     }

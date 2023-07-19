@@ -46,7 +46,8 @@ public class CommentServiceImpl implements CommentService {
             validator.lengthBetween3And15Symbols(createRequest.getContent());
             CommentModel authorModel = mapCommentDtoRequestToCommentModel.map(createRequest);
             return mapCommentModelToCommentDtoResponse.map(repository.save(authorModel));
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return null;
     }
@@ -64,6 +65,7 @@ public class CommentServiceImpl implements CommentService {
             repository.deleteById(id);
             return true;
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return false;
     }
